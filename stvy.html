@@ -1,0 +1,528 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>STVY - Share your Meal</title>
+    <style>
+        /* Reset and base styles */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+/* 
+        body {
+            font-family: Arial, sans-serif;
+            line-height: 1.6;
+            color: white;
+            background-color: black;
+        } */
+
+        body {
+            background-image: url("top-view-beverage-foods-with-empty-space-4k-hd-background-photo_1193781-31044.avif");
+            background-size: cover; /* Adjusts size to cover the entire viewport */
+            background-repeat: no-repeat;
+            background-attachment:fixed; 
+            background-position: center;
+        }
+        .container {
+            width: 100%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* Header styles */
+        header {
+            background-color: black;
+            padding: 20px 0;
+        }
+
+        .header-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            text-decoration: none;
+        }
+
+        .logo img {
+            width: 40px;
+            height: 40px;
+            margin-right: 10px;
+        }
+
+        .logo span {
+            font-size: 24px;
+            font-weight: bold;
+            color: #ff0000;
+        }
+
+        nav ul {
+            display: flex;
+            list-style-type: none;
+        }
+
+        nav ul li {
+            margin-left: 20px;
+        }
+
+        nav ul li a {
+            color: white;
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+
+        nav ul li a:hover {
+            color: #ff0000;
+        }
+
+        .signup-btn {
+            background-color: #ff0000;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+        .signup-btn:hover {
+            background-color: #cc0000;
+        }
+
+        /* Hero section styles */
+        .hero {
+            background-image: url('/placeholder.svg?height=600&width=1200&text=Delicious+Food+Background');
+            background-size: cover;
+            background-position: center;
+            height: 500px;
+            display: flex;
+            align-items: center;
+            text-align: center;
+            position: relative;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-color: rgba(0, 0, 0, 0.5);
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 1;
+        }
+
+        .hero h1 {
+            font-size: 48px;
+            margin-bottom: 20px;
+            color: #ff0000;
+        }
+
+        .hero p {
+            font-size: 24px;
+            margin-bottom: 30px;
+        }
+
+        .search-container {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .search-container input {
+            flex: 1;
+            padding: 10px;
+            border: 2px solid #ff0000;
+            border-radius: 5px;
+        }
+
+        /* Service cards styles */
+        .services {
+            padding: 60px 0;
+        }
+
+        .service-cards {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+        }
+
+        .service-card {
+            background-color: white;
+            border: 2px solid #ff0000;
+            border-radius: 10px;
+            padding: 20px;
+            color: black;
+            transition: transform 0.3s;
+        }
+
+        .service-card:hover {
+            transform: scale(1.05);
+        }
+
+        .service-card h3 {
+            font-size: 24px;
+            color: #ff0000;
+            margin-bottom: 10px;
+        }
+
+        .service-card p {
+            color: #666;
+            margin-bottom: 20px;
+        }
+
+        .service-card .discount {
+            background-color: #ffeeee;
+            color: #ff0000;
+            display: inline-block;
+            padding: 5px 10px;
+            border-radius: 20px;
+            font-weight: bold;
+            margin-bottom: 20px;
+        }
+
+        .service-card .card-footer {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .service-card img {
+            width: 120px;
+            height: 120px;
+            object-fit: cover;
+            border-radius: 10px;
+        }
+
+        /* Featured dishes styles */
+        .featured-dishes {
+            padding: 60px 0;
+        }
+
+        .featured-dishes h2 {
+            font-size: 36px;
+            color: #ff0000;
+            margin-bottom: 30px;
+            text-align: center;
+        }
+
+        .dish-cards {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 30px;
+        }
+
+        .dish-card {
+            background-color: white;
+            border: 2px solid #ff0000;
+            border-radius: 10px;
+            overflow: hidden;
+            transition: transform 0.3s;
+        }
+
+        .dish-card:hover {
+            transform: scale(1.05);
+        }
+
+        .dish-card img {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+        }
+
+        .dish-card-content {
+            padding: 20px;
+            color: black;
+        }
+
+        .dish-card h4 {
+            font-size: 18px;
+            margin-bottom: 10px;
+        }
+
+        .dish-card p {
+            color: #ff0000;
+            font-weight: bold;
+        }
+
+        /* Footer styles */
+        footer {
+            background-color: #333;
+            color: white;
+            padding: 40px 0;
+        }
+
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 30px;
+        }
+
+        .footer-section h5 {
+            font-size: 18px;
+            margin-bottom: 20px;
+        }
+
+        .footer-section ul {
+            list-style-type: none;
+        }
+
+        .footer-section ul li {
+            margin-bottom: 10px;
+        }
+
+        .footer-section ul li a {
+            color: white;
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+
+        .footer-section ul li a:hover {
+            color: #ff0000;
+        }
+
+        .social-icons {
+            display: flex;
+            gap: 15px;
+        }
+
+        .social-icons a {
+            color: white;
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+
+        .social-icons a:hover {
+            color: #ff0000;
+        }
+
+        .copyright {
+            text-align: center;
+            margin-top: 40px;
+            padding-top: 20px;
+            border-top: 1px solid #555;
+        }
+        .map-container {
+            text-align: center;
+            margin-top: 40px;
+            margin-bottom: 100px;
+            padding-top: 20px;
+            border-top: 10px solid #555;
+        
+        }
+
+        
+
+        /* Responsive styles */
+        @media (max-width: 768px) {
+            .header-content {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+
+            nav {
+                margin-top: 20px;
+            }
+
+            nav ul {
+                flex-direction: column;
+            }
+
+            nav ul li {
+                margin-left: 0;
+                margin-bottom: 10px;
+            }
+
+            .search-container {
+                flex-direction: column;
+            }
+
+            .hero h1 {
+                font-size: 36px;
+            }
+
+            .hero p {
+                font-size: 18px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- <iframe title="mapp" src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3497.893214061326!2d77.49584041070436!3d28.75260507851681!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x390cf47204fb9241%3A0xd11ed4123c7691fe!2sKIET%20GROUP%20OF%20INSTITUTIONS%2C%20Muradnagar%2C%20Uttar%20Pradesh%20201206!5e0!3m2!1sen!2sin!4v1710332661807!5m2!1sen!2sin" width="300" height="150" loading="lazy" referrerpolicy="no-referrer-when-downgrade" style="border-radius: 10px;"></iframe> -->
+    <header>
+        <div class="container">
+            <div class="header-content">
+                <img src="Logo.png" width="auto" height="50">
+                <span>STVY</span>
+
+                    <!-- <img src="/placeholder.svg?height=40&width=40" alt="STVY Logo">
+                    <span>STVY</span> -->
+            <!-- <div class="header-content">
+                <a href="#" class="logo">
+                    <img src="/placeholder.svg?height=40&width=40" alt="STVY Logo">
+                    <span>STVY</span>
+                </a> -->
+                <nav>
+                    <ul>
+                        <li><a href="#">Partner With Us</a></li>
+                        <li><a href="#">About Us</a></li>
+                        <li><a href="#">Contact</a></li>
+                        <li><a href="">ITEMS</a></li>
+
+                    </ul>
+                </nav>
+                <!-- <button class="signup-btn">Sign up</button> -->
+                <button class="signup-btn" onclick="location.href='login.html';">Sign Up</button>
+            </div>
+        </div>
+    </header>
+
+    <main>
+        <section class="hero">
+            <div class="container">
+                <div class="hero-content">
+                    <h1>STVY - Share your Meal</h1>
+                    <p>Make an order here, Make a change everywhere!</p>
+                    <div class="search-container">
+                        <input type="text" placeholder="Enter your delivery location">
+                        <input type="text" placeholder="Search for restaurant, item or more">
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="services">
+            <div class="container">
+                <div class="service-cards">
+                    <div class="service-card">
+                        <h3>FOOD DELIVERY</h3>
+                        <p>FROM RESTAURANTS</p>
+                        <div class="discount">UPTO 60% OFF</div>
+                        <div class="card-footer">
+                            <img src="logo\tasty-burger.avif" alt="Tasty Burger">
+                            <span>&#8594;</span>
+                        </div>
+                    </div>
+                    <div class="service-card">
+                        <h3>FOOD DELIVERY</h3>
+                        <p>FRESH & FAST</p>
+                        <div class="card-footer">
+                            <img src="/placeholder.svg?height=160&width=160&text=Fresh+Salad" alt="Fresh Salad">
+                            <span>&#8594;</span>
+                        </div>
+                    </div>
+                    <div class="service-card">
+                        <h3>GENIE</h3>
+                        <p>PICK-UP & DROP</p>
+                        <div class="card-footer">
+                            <img src="/placeholder.svg?height=120&width=120&text=Fast+Delivery" alt="Fast Delivery">
+                            <span>&#8594;</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="featured-dishes">
+            <div class="container">
+                <h2>Featured Dishes</h2>
+                <div class="dish-cards">
+                    <div class="dish-card">
+                        <img src="/placeholder.svg?height=200&width=200&text=Spicy+Ramen" alt="Spicy Ramen">
+                        <div class="dish-card-content">
+                            <h4>Spicy Ramen</h4>
+                            <p>$12.99</p>
+                        </div>
+                    </div>
+                    <div class="dish-card">
+                        <img src="/placeholder.svg?height=200&width=200&text=Veggie+Pizza" alt="Veggie Pizza">
+                        <div class="dish-card-content">
+                            <h4>Veggie Pizza</h4>
+                            <p>$14.99</p>
+                        </div>
+                    </div>
+                    <div class="dish-card">
+                        <img src="/placeholder.svg?height=200&width=200&text=Chocolate+Cake" alt="Chocolate Cake">
+                        <div class="dish-card-content">
+                            <h4>Chocolate Cake</h4>
+                            <p>$6.99</p>
+                        </div>
+                    </div>
+                    <div class="dish-card">
+                        <img src="/placeholder.svg?height=200&width=200&text=Grilled+Salmon" alt="Grilled Salmon">
+                        <div class="dish-card-content">
+                            <h4>Grilled Salmon</h4>
+                            <p>$18.99</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <div class="map-container">
+            <iframe title="mapp" src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3497.893214061326!2d77.49584041070436!3d28.75260507851681!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x390cf47204fb9241%3A0xd11ed4123c7691fe!2sKIET%20GROUP%20OF%20INSTITUTIONS%2C%20Muradnagar%2C%20Uttar%20Pradesh%20201206!5e0!3m2!1sen!2sin!4v1710332661807!5m2!1sen!2sin" width="500" height="300" loading="lazy" referrerpolicy="no-referrer-when-downgrade" style="border-radius: 10px;"></iframe>
+        </div>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h5>STVY</h5>
+                    <p>Sharing meals, changing lives.</p>
+                </div>
+                <div class="footer-section">
+                    <h5>Quick Links</h5>
+                    <ul>
+                        <li><a href="#">Home</a></li>
+                        <li><a href="#">About Us</a></li>
+                        <li><a href="#">Services</a></li>
+                        <li><a href="#">Contact</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h5>Contact Us</h5>
+                    <p>123 Food Street, Tasty City</p>
+                    <p>Phone: (123) 456-7890</p>
+                    <p>Email: info@stvy.com</p>
+                </div>
+                <div class="footer-section">
+                    <h5>Follow Us</h5>
+                    <div class="social-icons">
+                        <a href="#" aria-label="Facebook">
+                            <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
+                                <path d="M22 12c0-5.523-4.477-10-10-10S2 6.477 2 12c0 4.991 3.657 9.128 8.438 9.878v-6.987h-2.54V12h2.54V9.797c0-2.506 1.492-3.89 3.777-3.89 1.094 0 2.238.195 2.238.195v2.46h-1.26c-1.243 0-1.63.771-1.63 1.562V12h2.773l-.443 2.89h-2.33v6.988C18.343 21.128 22 16.991 22 12z" />
+                            </svg>
+                        </a>
+                        <a href="#" aria-label="Instagram">
+                            <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
+                                <path d="M12.315 2c2.43 0 2.784.013 3.808.06 1.064.049 1.791.218 2.427.465a4.902 4.902 0 011.772 1.153 4.902 4.902 0 011.153 1.772c.247.636.416 1.363.465 2.427.048 1.067.06 1.407.06 4.123v.08c0 2.643-.012 2.987-.06 4.043-.049 1.064-.218 1.791-.465 2.427a4.902 4.902 0 01-1.153 1.772 4.902 4.902 0 01-1.772 1.153c-.636.247-1.363.416-2.427.465-1.067.048-1.407.06-4.123.06h-.08c-2.643 0-2.987-.012-4.043-.06-1.064-.049-1.791-.218-2.427-.465a4.902 4.902 0 01-1.772-1.153 4.902 4.902 0 01-1.153-1.772c-.247-.636-.416-1.363-.465-2.427-.047-1.024-.06-1.379-.06-3.808v-.63c0-2.43.013-2.784.06-3.808.049-1.064.218-1.791.465-2.427a4.902 4.902 0 011.153-1.772A4.902 4.902 0 015.45 2.525c.636-.247 1.363-.416 2.427-.465C8.901 2.013 9.256 2 11.685 2h.63zm-.081 1.802h-.468c-2.456 0-2.784.011-3.807.058-.975.045-1.504.207-1.857.344-.467.182-.8.398-1.15.748-.35.35-.566.683-.748 1.15-.137.353-.3.882-.344 1.857-.047 1.023-.058 1.351-.058 3.807v.468c0 2.456.011 2.784.058 3.807.045.975.207 1.504.344 1.857.182.466.399.8.748 1.15.35.35.683.566 1.15.748.353.137.882.3 1.857.344 1.054.048 1.37.058 4.041.058h.08c2.597 0 2.917-.01 3.96-.058.976-.045 1.505-.207 1.858-.344.466-.182.8-.398 1.15-.748.35-.35.566-.683.748-1.15.137-.353.3-.882.344-1.857.048-1.055.058-1.37.058-4.041v-.08c0-2.597-.01-2.917-.058-3.96-.045-.976-.207-1.505-.344-1.858a3.097 3.097 0 00-.748-1.15 3.098 3.098 0 00-1.15-.748c-.353-.137-.882-.3-1.857-.344-1.023-.047-1.351-.058-3.807-.058zM12 6.865a5.135 5.135 0 110 10.27 5.135 5.135 0 010-10.27zm0 1.802a3.333 3.333 0 100 6.666 3.333 3.333 0 000-6.666zm5.338-3.205a1.2 1.2 0 110 2.4 1.2 1.2 0 010-2.4z" />
+                            </svg>
+                        </a>
+                        <a href="#" aria-label="Twitter">
+                            <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
+                                <path d="M8.29 20.251c7.547 0 11.675-6.253 11.675-11.675 0-.178 0-.355-.012-.53A8.348 8.348 0 0022 5.92a8.19 8.19 0 01-2.357.646 4.118 4.118 0 001.804-2.27 8.224 8.224 0 01-2.605.996 4.107 4.107 0 00-6.993 3.743 11.65 11.65 0 01-8.457-4.287 4.106 4.106 0 001.27 5.477A4.072 4.072 0 012.8 9.713v.052a4.105 4.105 0 003.292 4.022 4.095 4.095 0 01-1.853.07 4.108 4.108 0 003.834 2.85A8.233 8.233 0 012 18.407a11.616 11.616 0 006.29 1.84" />
+                            </svg>
+                        </a>
+                    </div>
+                </div>
+            </div>
+            <div class="copyright">
+                <p>&copy; 2024 STVY. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+</body>
+</html>
