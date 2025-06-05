@@ -1,0 +1,321 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>STVY - Food Search & Menu</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #000000;
+        }
+
+        /* Search Bar Styles */
+        .search-container {
+            position: relative;
+            width: 100%;
+            margin-bottom: 20px;
+        }
+
+        #searchInput {
+            width: 100%;
+            padding: 10px 40px 10px 15px;
+            border: 2px solid #ddd;
+            border-radius: 25px;
+            font-size: 16px;
+        }
+
+        #searchIcon {
+            position: absolute;
+            right: 15px;
+            top: 50%;
+            transform: translateY(-50%);
+            cursor: pointer;
+            color: #888;
+        }
+
+        #searchResults {
+            background-color: white;
+            border: 1px solid #ddd;
+            border-radius: 10px;
+            max-height: 300px;
+            overflow-y: auto;
+        }
+
+        .search-item {
+            padding: 10px;
+            border-bottom: 1px solid #eee;
+            display: flex;
+            align-items: center;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+        .search-item:hover {
+            background-color: #f9f9f9;
+        }
+
+        .search-item img {
+            width: 50px;
+            height: 50px;
+            object-fit: cover;
+            margin-right: 15px;
+            border-radius: 5px;
+        }
+
+        .search-item-details {
+            flex-grow: 1;
+        }
+
+        .search-item-name {
+            font-weight: bold;
+        }
+
+        .search-item-category {
+            color: #666;
+            font-size: 0.8em;
+        }
+
+        .search-item-price {
+            color: #4CAF50;
+            font-weight: bold;
+        }
+
+        /* Menu Styles */
+        .menu-container {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+
+        .category-title {
+            font-size: 28px;
+            font-weight: bold;
+            margin-bottom: 10px;
+            color: #ff0000;
+        }
+
+        .menu-item {
+            display: flex;
+            align-items: center;
+            padding: 10px;
+            background-color: #fff;
+            border-radius: 8px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+
+        .menu-item h2 {
+            margin: 0;
+            font-size: 24px;
+            color: #333;
+        }
+
+        .menu-item p {
+            font-size: 16px;
+            color: #666;
+            margin-top: 5px;
+        }
+
+        .menu-item img {
+            width: 120px;
+            height: 120px;
+            margin-right: 20px;
+            border-radius: 8px;
+            object-fit: cover;
+        }
+
+        .menu-item a {
+            color: #333;
+            text-decoration: none;
+        }
+
+        .menu-item a:hover {
+            text-decoration: underline;
+        }
+
+        /* New Menu styles for Indian-Chinese and Pasta */
+        .food-item, .pasta-item {
+            display: flex;
+            align-items: center;
+            padding: 10px;
+            background-color: #fff;
+            border-radius: 8px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+
+        .food-item h2, .pasta-item h2 {
+            margin: 0;
+            font-size: 24px;
+            color: #333;
+        }
+
+        .food-item p, .pasta-item p {
+            font-size: 16px;
+            color: #666;
+            margin-top: 5px;
+        }
+
+        .food-item img, .pasta-item img {
+            width: 120px;
+            height: 120px;
+            margin-right: 20px;
+            border-radius: 8px;
+            object-fit: cover;
+        }
+
+        .food-item a, .pasta-item a {
+            color: #333;
+            text-decoration: none;
+        }
+
+        .food-item a:hover, .pasta-item a:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Search Bar Section -->
+    <div class="search-container">
+        <input 
+            type="text" 
+            id="searchInput" 
+            placeholder="Search dishes, cuisines, ingredients..."
+        >
+        <span id="searchIcon">🔍</span>
+        <div id="searchResults"></div>
+    </div>
+
+    <!-- Menu Section -->
+    <div class="menu-container">
+
+        <!-- Pizza Category -->
+        <div class="category-title">Pizza</div>
+        <div class="menu-item">
+            <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRTP3Xg98whHDBt-2EdLaoo9SLqCTJwlUmU3w&s" alt="Margherita Pizza">
+            <div>
+                <h2><a href="https://www.pizzahut.co.in/order/pizzas/?kind=margherita-bestseller&modal=margherita-bestseller-pan-personal&sizes=-none-&type=pizza">Margherita</a></h2>
+                <p>A classic pizza topped with fresh mozzarella, tomatoes, and basil. Simple yet delicious!</p>
+            </div>
+        </div>
+
+        <div class="menu-item">
+            <img src="https://api.pizzahut.io/v1/content/en-in/in-1/images/pizza/awesome-american-cheesy.17f198e5a73db40c367ddfe96da54a4c.1.jpg" alt="Awesome American Cheesy Chicken">
+            <div>
+                <h2><a href="https://www.pizzahut.co.in/order/pizzas/?kind=awesome-american-cheesy-chicken&modal=awesome-american-cheesy-chicken-pan-personal&sizes=-none-&type=pizza">Awesome American Cheesy Chicken</a></h2>
+                <p>A popular choice with a generous amount of pepperoni slices on top of mozzarella and cheesy paneer.</p>
+            </div>
+        </div>
+
+        <div class="menu-item">
+            <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRH95fY9dbHxcjCXYKXzQ4sGEp10SxIUgbTBg&s" alt="Veggie Paradise Pizza">
+            <div>
+                <h2><a href="">Veggie Paradise</a></h2>
+                <p>A vegetarian option with mushrooms, bell peppers, onions, olives, and spinach, all on a mozzarella base.</p>
+            </div>
+        </div>
+
+        <div class="menu-item">
+            <img src="https://www.dominos.co.in/files/items/Pepper_Barbeque_&_Onion.jpg" alt="BBQ Chicken Pizza">
+            <div>
+                <h2><a href="#">BBQ Chicken</a></h2>
+                <p>A delicious pizza topped with smoky BBQ sauce, grilled chicken, red onions, and a blend of cheeses.</p>
+            </div>
+        </div>
+
+        <!-- Burger Category -->
+        <div class="category-title">Burgers</div>
+
+        <div class="menu-item">
+            <img src="https://d1rgpf387mknul.cloudfront.net/products/PLP/web/2x_web_20240304073207570010_482x264jpg" alt="Classic Burger">
+            <div>
+                <h2><a href="#">Classic Burger</a></h2>
+                <p>A timeless favorite with a juicy beef patty, fresh lettuce, tomato, onion, and a special house sauce.</p>
+            </div>
+        </div>
+
+        <div class="menu-item">
+            <img src="https://d1rgpf387mknul.cloudfront.net/products/PLP/ml/2x_ml_20240304074718365258_426x234jpg" alt="Veg Burst Burger">
+            <div>
+                <h2><a href="#">Veg Burst Burger</a></h2>
+                <p>A rich and cheesy delight with melted cheddar over a beef patty, topped with pickles and ketchup.</p>
+            </div>
+        </div>
+
+        <div class="menu-item">
+            <img src="https://d1rgpf387mknul.cloudfront.net/products/PLP/ml/2x_ml_20240304073740754691_426x234jpg" alt="Crispy Chicken Burger">
+            <div>
+                <h2><a href="#">Crispy Chicken</a></h2>
+                <p>A crispy or grilled chicken fillet, fresh veggies, and a creamy mayo-based sauce.</p>
+            </div>
+        </div>
+
+        <div class="menu-item">
+            <img src="https://d1rgpf387mknul.cloudfront.net/products/PLP/ml/2x_ml_20240304075745062874_426x234jpg" alt="Veggie Burger">
+            <div>
+                <h2><a href="#">Veggie Burger</a></h2>
+                <p>A healthy choice with a grilled vegetable patty, lettuce, tomato, and a tangy sauce.</p>
+            </div>
+        </div>
+
+        <!-- Indian-Chinese Section -->
+        <div class="category-title">Indian-Chinese</div>
+        <div class="food-item">
+            <img src="https://product-assets.faasos.io/production/product/image_1662646569264_Veg_Manchurian_Dry.jpg" alt="Veg Manchurian">
+            <div>
+                <h2><a href="#">Veg Manchurian</a></h2>
+                <p>Crispy veggie balls cooked in a tangy, spicy sauce, a favorite in Indo-Chinese cuisine.</p>
+            </div>
+        </div>
+
+        <div class="food-item">
+            <img src="https://th.bing.com/th/id/OIP.SXtS5tDhI4RypeoriVKIKgHaE8?rs=1&pid=ImgDetMain" alt="Veg Hakka Noodles">
+            <div>
+                <h2><a href="#">Veg Hakka Noodles</a></h2>
+                <p>A perfect blend of stir-fried noodles with mixed veggies, tangy sauces, and a delightful crunch.</p>
+            </div>
+        </div>
+
+        <div class="food-item">
+            <img src="https://myfoodstory.com/wp-content/uploads/2021/06/Chilli-Paneer-2.jpg" alt="Veg Chilli">
+            <div>
+                <h2><a href="#">Veg Chilli</a></h2>
+                <p>Chili-infused crispy vegetables stir-fried to perfection with a sweet and spicy glaze.</p>
+            </div>
+        </div>
+
+        <div class="food-item">
+            <img src="https://www.archanaskitchen.com/images/archanaskitchen/World_Appetizers/chilli-chicken-recipe.jpg" alt="Chili Chicken">
+            <div>
+                <h2><a href="#">Chili Chicken</a></h2>
+                <p>Crispy chicken cooked in a spicy, tangy sauce with bell peppers and onions.</p>
+            </div>
+        </div>
+
+        <!-- Pasta Section -->
+        <div class="category-title">Pasta</div>
+
+        <div class="pasta-item">
+            <img src="https://i.pinimg.com/originals/88/bb/05/88bb05ea2964de87a10f85e52fda383f.png" alt="Pasta">
+            <div>
+                <h2><a href="#">Spaghetti</a></h2>
+                <p>A classic Italian pasta with a rich, creamy tomato sauce and grated parmesan on top.</p>
+            </div>
+        </div>
+
+        <div class="pasta-item">
+            <img src="https://fthmb.tqn.com/YRAcmvrlt0utqXxNtbUhZwyf9Zc=/960x0/filters:no_upscale():max_bytes(150000):strip_icc()/close-up-of-penne-arabiata-in-bowl-683842303-587e99035f9b584db3432942.jpg" alt="Spaghetti Pasta">
+            <div>
+                <h2><a href="#">Penne</a></h2>
+                <p>Penne pasta tossed with creamy Alfredo sauce, sun-dried tomatoes, and fresh basil.</p>
+            </div>
+        </div>
+
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
